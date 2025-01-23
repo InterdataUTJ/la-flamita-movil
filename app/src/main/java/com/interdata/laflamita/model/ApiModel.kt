@@ -10,13 +10,14 @@ import com.android.volley.toolbox.HurlStack
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.interdata.laflamita.R
 import org.json.JSONObject
 
 // Este modelo se encarga de abstraer las llamadas a API en otros modelos
 // No se usa directamente, solo se hereda en otros modelos
 open class ApiModel(ctx: Context) {
     private val requestQueue: RequestQueue = Volley.newRequestQueue(ctx)
-    protected val serverURL = "https://laflamita.live"
+    protected val serverURL = R.string.server_api_url
 
     protected fun clearCache(key: String) {
         requestQueue.cache.remove(key)

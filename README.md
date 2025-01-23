@@ -25,14 +25,17 @@
 Desarrollo para app área cliente de [`Android`](https://developer.android.com/kotlin) para taquería la flamita. La solución se enfoca en desarrollar toda la interfaz del cliente para emplear las operaciones de `la-flamita-cliente` enfocada a los clientes (el área administrativa se maneja en el proyecto [`la-flamita-admin`](https://github.com/InterdataUTJ/la-flamita-admin/)).
 
 
-# API de Google
+# Configuración
 
-Este proyecto implementa un login usando la API de google, para funcionar es necesario que crees un archivo `google_auth.xml` en la ruta `app/src/main/res/values`, mira el siguiente ejemplo.
+Este proyecto implementa un login usando la API de google, para funcionar es necesario que crees un archivo `la_flamita.xml` en la ruta `app/src/main/res/values`, mira el siguiente ejemplo.
+
+Además, tienes que agregar el url de la API de la-flamita-cliente
 
 ```xml
-<!-- Remplaza los ... con el Web Client ID de la consola de Google Cloud -->
+<!-- Remplaza los ... con el Web Client ID de la consola de Google Cloud y el URL de tu api de la-flamita-cliente -->
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="web_client_id">...</string>
+    <string name="server_api_url">...</string>
 </resources>
 ```
