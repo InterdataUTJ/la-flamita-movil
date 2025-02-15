@@ -8,6 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
+        ndk.abiFilters += listOf("x86_64", "armeabi-v7a", "arm64-v8a")
         applicationId = "com.interdata.laflamita"
         minSdk = 24
         targetSdk = 34
@@ -45,6 +46,14 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("x86_64", "armeabi-v7a", "arm64-v8a")
+            isUniversalApk = true
         }
     }
 }
