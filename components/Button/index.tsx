@@ -1,16 +1,17 @@
-import React from 'react'
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
 import colors from '@/config/colors';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { ButtonProps } from './types';
 
-import { ButtonProps } from './types'
 
 export default function Button(props: ButtonProps) {
   return (
     <TouchableOpacity 
-      style={styles.button}
+      disabled={props.disabled || props.loading}
+      style={{ ...styles.button, ...((props.disabled || props.loading) ? styles.buttonDisabled : {}) }}
       onPress={props.onPress}
     >
-      {props.icon}
+      {props.loading ? <ActivityIndicator size="small" color="white" /> : props.icon}
       <Text style={styles.label}>{props.children}</Text>
     </TouchableOpacity>
   )
@@ -28,6 +29,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 2,
     backgroundColor: colors.primary[600],
+  },
+
+  buttonDisabled: {
+    backgroundColor: colors.primary[300],
   },
 
   label: {

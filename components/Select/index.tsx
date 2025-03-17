@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput as RNTextInput, View, NativeSyntheticEvent, TextInputFocusEventData, Platform } from "react-native";
+import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, Text, View, NativeSyntheticEvent, TargetedEvent, Platform } from "react-native";
 import colors from "@/config/colors";
-import { TextInputProps } from "./types";
+import { SelectInputProps } from "./types";
 
-export default function TextInput(props: TextInputProps) {
+export default function SelectInput(props: SelectInputProps) {
 
   const [focused, setFocused] = useState(false);
 
-  const onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+  const onBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
     setFocused(false);
     props.onBlur && props.onBlur(e);
   }
@@ -18,22 +19,17 @@ export default function TextInput(props: TextInputProps) {
         {props.label}
         {props.required && <Text style={styles.required}>  *</Text>}
       </Text>
-      <RNTextInput
-        style={{ 
-          ...styles.input , 
-          ...(focused ? styles.inputFocused : {}), 
-          ...(props.showErrors ? styles.inputError : {}),
-          ...(Platform.OS === "web" ? { outlineStyle: "none" } : {}) 
-        }}
-        placeholder={props.label}
-        onChangeText={props.onChangeText}
-        onBlur={onBlur}
-        value={props.value}
-        keyboardType={props.keyboardType}
-        secureTextEntry={props.secureTextEntry}
-        enterKeyHint={props.enterKeyHint || "done"}
-        onFocus={() => setFocused(true)}
-      />
+      <View style={{ ...styles.input, ...(focused ? styles.inputFocused : {}), ...(props.showErrors ? styles.inputError : {}) }}>
+        <Picker
+          onBlur={onBlur}
+          style={styles.select}
+          selectedValue={props.value}
+          onValueChange={(itemValue, _) => props.onChangeText && props.onChangeText(itemValue)}
+          onFocus={() => setFocused(true)}
+        >
+          {props.children}
+        </Picker>
+      </View>
       {props.showErrors && (
         <Text style={styles.error}>{props.error}</Text>
       )}
@@ -41,6 +37,7 @@ export default function TextInput(props: TextInputProps) {
   );
 }
 
+SelectInput.Option = Picker.Item;
 const styles = StyleSheet.create({
   label: {
     fontSize: 14,
@@ -54,7 +51,8 @@ const styles = StyleSheet.create({
 
   input: {
     display: "flex",
-    padding: 10, 
+    padding: 0,
+    overflow: "hidden",
     borderRadius: 8, 
     borderWidth: 1,
     borderColor: "#D1D5DB", 
@@ -68,6 +66,7 @@ const styles = StyleSheet.create({
   inputFocused: {
     borderColor: colors.primary[600],
     borderWidth: 2,
+    outline: "none",
   },
 
   inputError: {
@@ -80,5 +79,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
     fontWeight: "bold",
+  },
+
+  select: {
+    padding: Platform.OS === "web" ? 10 : 0,
+    backgroundColor: '#fff',
+    borderWidth: 0,
   }
 });

@@ -1,14 +1,18 @@
 import { Stack } from "expo-router";
-import colors from "@/config/colors";
+import AuthContextProvider from "@/hooks/AuthContext/Provider";
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{
-      statusBarStyle: "dark",
-      statusBarBackgroundColor: colors.backgroundColor,
-    }}>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <AuthContextProvider>
+      <Stack screenOptions={{
+        statusBarStyle: "dark",
+        statusBarBackgroundColor: "white",
+      }}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="dispositivo" options={{ headerShown: false, presentation: "modal" }} />
+      </Stack>
+    </AuthContextProvider>
   );
 }
