@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "la-flamita-movil",
+    "name": "La Flamita",
     "slug": "la-flamita-movil",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "orientation": "default",
-    "icon": "./assets/images/la_flamita.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "laflamita",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -13,8 +13,9 @@
     },
     "android": {
       "package": "com.interdatautj.laflamita",
+      "icon": "./assets/images/icon.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/la_flamita.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#F8A98C"
       },
       "permissions": [
@@ -30,23 +31,34 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-
-      ["expo-splash-screen", {
-        "image": "./assets/images/la_flamita.png",
-        "imageWidth": 200,
-        "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
-      }],
-      
-      ["expo-build-properties", {
-        "android": {
-          "usesCleartextTraffic": true
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/la_flamita.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
         }
-      }]
-
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "095dd119-1d0f-464d-b12d-897a272dec98"
+      }
     }
   }
 }
