@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router';
-import { LineChart } from 'react-native-gifted-charts';
 import { SensorResponse } from '@/services/Sensores/types';
 import SensorService from '@/services/Sensores';
 import useAuthContext from '@/hooks/AuthContext/hook';
