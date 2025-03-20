@@ -12,10 +12,15 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.interdatautj.laflamita",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/la_flamita.png",
         "backgroundColor": "#F8A98C"
-      }
+      },
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -24,16 +29,21 @@
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/la_flamita.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+      "expo-secure-store",
+
+      ["expo-splash-screen", {
+        "image": "./assets/images/la_flamita.png",
+        "imageWidth": 200,
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      }],
+      
+      ["expo-build-properties", {
+        "android": {
+          "usesCleartextTraffic": true
         }
-      ],
-      "expo-secure-store"
+      }]
+
     ],
     "experiments": {
       "typedRoutes": true
