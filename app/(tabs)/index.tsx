@@ -1,4 +1,4 @@
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import colors from '@/config/colors'
 import Dispositivo from '@/components/Dispositivo';
@@ -16,6 +16,11 @@ export default function Home() {
     if (!auth.token) return;
     SensorService.listar(auth.token).then((dispositivos) => {
       setDispositivos(dispositivos);
+      setLoading(false);
+    }).catch(e => {
+      if (e instanceof Error) Alert.alert("Ocurrio un error", e.message);
+      else Alert.alert("Ocurrio un error", "Ah ocurrido un error al crear el dispositivo.");
+      console.error(e);
       setLoading(false);
     });
   });

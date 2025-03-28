@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, Image, StyleSheet } from "react-native";
+import { ScrollView, Text, View, Image, StyleSheet, Alert } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -28,7 +28,8 @@ export default function Login() {
         router.push("/(tabs)");
       })
       .catch((e) => {
-        alert(e.message);
+        if (e instanceof Error) Alert.alert("Ocurrio un error", e.message);
+        else Alert.alert("Ocurrio un error", "Ah ocurrido un error al crear el dispositivo.");
         setLoading(false);
       });
   }

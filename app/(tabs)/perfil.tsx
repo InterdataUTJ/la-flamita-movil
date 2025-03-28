@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import useAuthContext from '@/hooks/AuthContext/hook';
 import Button from '@/components/Button';
 import { router } from 'expo-router';
@@ -9,6 +9,21 @@ import colors from '@/config/colors';
 export default function Home() {
   const auth = useAuthContext();
   const [loading, setLoading] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+
+      await auth.logout();
+      router.replace("/login");
+    } catch(e: Error | any) {
+      console.error(e);
+      if (e instanceof Error) Alert.alert("Ocurrio un error", e.message);
+      else Alert.alert("Ocurrio un error", "Ah ocurrido un error al crear el dispositivo.");
+    }
+
+    setLoading(false);
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -54,12 +69,7 @@ export default function Home() {
       <Button
         loading={loading}
         icon={<FontAwesome5 name="user-alt" size={15} color="white" />}
-        onPress={async () => {
-          setLoading(true);
-          await auth.logout();
-          setLoading(false);
-          router.replace("/login");
-        }}
+        onPress={handleLogout}
       >
         Cerrar sesión
       </Button>

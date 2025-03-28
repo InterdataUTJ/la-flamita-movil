@@ -35,16 +35,15 @@ export default function Crear() {
 
     try {
       await SensorService.crear(auth.token, { nombre: values.nombre, tipo: values.tipo });
-      setLoading(false);
       actions.resetForm();
       Alert.alert("Dispositivo creado", "Dispositivo creado correctamente");
     } catch(e: Error | unknown) {
-      
       if (e instanceof Error) Alert.alert("Ocurrio un error", e.message);
       else Alert.alert("Ocurrio un error", "Ah ocurrido un error al crear el dispositivo.");
-      setLoading(false);
-    
     }
+
+
+    setLoading(false);
   }
 
   return (
